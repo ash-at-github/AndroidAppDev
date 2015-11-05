@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener{
-    //private TextView textView;
+    //private TextView stepDetectorTV;
     private TextView stepsCountTextView;
 
     private SensorManager mSensorManager;
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-      //  textView = (TextView) findViewById(R.id.TEXTVIEW1);
+      //  stepDetectorTV = (TextView) findViewById(R.id.detectorTV);
         stepsCountTextView = (TextView) findViewById(R.id.counter);
 
 
@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onSensorChanged(SensorEvent event) {
         Sensor sensor = event.sensor;
+        System.out.println(sensor);
         float[] values = event.values;
         int value = -1;
 
@@ -70,12 +71,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
 
         if (sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
+          //  stepDetectorTV.setText("");
             stepsCountTextView.setText("Steps taken till last reboot : "+value);
             //textView.setText("Steps taken till last reboot : " + value);
         } else if (sensor.getType() == Sensor.TYPE_STEP_DETECTOR) {
             // For test only. Only allowed value is 1.0 i.e. for step taken
-          //  textView.setText("You are starting to take steps... " );
+           // stepDetectorTV.setText("You are starting to take steps... " );
         }
+
     }
 
     @Override
